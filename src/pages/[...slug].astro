@@ -1,0 +1,23 @@
+---
+// Builds one page per Markdown file in src/content/pages (see src/content.config.ts).
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => ({
+    params: { slug: page.id === 'index' ? undefined : page.id },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+<Base title={page.data.title} description={page.data.description} home={page.id === 'index'} hidden={page.data.hidden}>
+  <article class="content">
+    <Content />
+    {page.data.form && <ContactForm kind={page.data.form} />}
+  </article>
+</Base>

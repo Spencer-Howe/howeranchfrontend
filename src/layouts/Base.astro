@@ -1,0 +1,108 @@
+---
+// Every page's shell: Google/social tags, the business details Google reads, header, footer,
+// and the photo lightbox for galleries.
+import { getImage } from 'astro:assets';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { contact, social } from '../data/site';
+import shareImage from '../assets/photos/weddings/ceremony-front-sunset-final-bg-copy-962ce7.jpg';
+import '../styles/global.css';
+
+interface Props { title: string; description?: string; home?: boolean; hidden?: boolean }
+const { title, description = '', home = false, hidden = false } = Astro.props;
+
+const fullTitle = home ? 'Howe Ranch | Mini Moos, Weddings & Farm Stays in Kalispell, Montana' : `${title} | Howe Ranch`;
+const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/'), Astro.site).href;
+const og = await getImage({ src: shareImage, width: 1200, format: 'jpg' });
+const ogUrl = new URL(og.src, Astro.site).href;
+
+// What Google shows for the business (Wix still says Wildomar, California)
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Howe Ranch',
+  url: 'https://www.thehoweranch.com',
+  telephone: contact.phone,
+  email: contact.email,
+  image: ogUrl,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: contact.street,
+    addressLocality: contact.city,
+    addressRegion: contact.region,
+    postalCode: contact.postalCode,
+    addressCountry: 'US',
+  },
+  sameAs: social.map((s) => s.href),
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    {hidden ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Howe Ranch" />
+    <meta property="og:title" content={fullTitle} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#27211e" />
+    {home && <script type="application/ld+json" set:html={JSON.stringify(business)} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <dialog class="lightbox" aria-label="Photo">
+      <img alt="" />
+      <button class="close" type="button" aria-label="Close">×</button>
+      <button class="nav prev" type="button" aria-label="Previous photo">‹</button>
+      <button class="nav next" type="button" aria-label="Next photo">›</button>
+    </dialog>
+    <script>
+      // Tap a gallery photo to see it large; arrows / swipe to move through the gallery.
+      const dialog = document.querySelector('dialog.lightbox') as HTMLDialogElement;
+      const big = dialog.querySelector('img') as HTMLImageElement;
+      let photos: HTMLImageElement[] = [];
+      let at = 0;
+      const show = (i: number) => {
+        at = (i + photos.length) % photos.length;
+        const p = photos[at];
+        const sizes = (p.srcset || '').split(',').map((s) => s.trim().split(' ')[0]).filter(Boolean);
+        big.src = sizes[sizes.length - 1] || p.currentSrc || p.src;
+        big.alt = p.alt;
+      };
+      document.querySelectorAll('.gallery').forEach((g) => {
+        const imgs = Array.from(g.querySelectorAll('img'));
+        imgs.forEach((img, i) => img.addEventListener('click', () => { photos = imgs; show(i); dialog.showModal(); }));
+      });
+      dialog.querySelector('.close')!.addEventListener('click', () => dialog.close());
+      dialog.querySelector('.prev')!.addEventListener('click', () => show(at - 1));
+      dialog.querySelector('.next')!.addEventListener('click', () => show(at + 1));
+      dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+      document.addEventListener('keydown', (e) => {
+        if (!dialog.open) return;
+        if (e.key === 'ArrowRight') show(at + 1);
+        if (e.key === 'ArrowLeft') show(at - 1);
+      });
+      let x0 = 0;
+      dialog.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+      dialog.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 50) show(at + (dx < 0 ? 1 : -1));
+      });
+    </script>
+  </body>
+</html>

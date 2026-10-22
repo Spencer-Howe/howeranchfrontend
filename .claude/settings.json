@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(npm run build)",
+      "Bash(npm run check)",
+      "Bash(npm run check-links:*)",
+      "Bash(npm run photos)",
+      "Bash(npx astro dev stop)",
+      "Bash(npx astro dev status)",
+      "Bash(npx astro dev logs)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git pull:*)",
+      "Bash(git push)",
+      "Bash(git revert:*)",
+      "Edit(src/**)",
+      "Edit(public/_redirects)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(rm -rf:*)",
+      "Edit(public/_files/**)"
+    ]
+  }
+}

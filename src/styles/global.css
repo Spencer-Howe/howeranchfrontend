@@ -1,0 +1,152 @@
+/* Howe Ranch: colors and type taken from the Wix theme (Futura -> Jost, Poppins ExtraLight headings) */
+@import '@fontsource/jost/400.css';
+@import '@fontsource/jost/500.css';
+@import '@fontsource/jost/600.css';
+@import '@fontsource/poppins/200.css';
+@import '@fontsource/poppins/300.css';
+
+:root {
+  --brown: #27211e;      /* text, header */
+  --brown-2: #4e413a;
+  --olive: #727557;      /* buttons, accents */
+  --olive-dark: #4c4e3a;
+  --gold: #d0ac68;       /* highlights */
+  --gold-dark: #b28838;
+  --cream: #faf8f4;      /* page background */
+  --sand: #efe9df;       /* panels */
+  --line: #ded5c8;
+  --muted: #6b605a;
+  --page: min(1180px, 100% - 32px);
+  --read: min(760px, 100% - 32px);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--brown);
+  font: 400 1.0625rem/1.7 'Jost', system-ui, sans-serif;
+}
+
+a { color: var(--olive-dark); text-underline-offset: 3px; }
+a:hover { color: var(--gold-dark); }
+
+img { max-width: 100%; height: auto; }
+
+h1, h2, h3, h4 {
+  font-family: 'Poppins', 'Jost', sans-serif;
+  font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: .01em;
+  color: var(--brown);
+  text-wrap: balance;
+}
+h1 { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 200; margin: .2em 0 .5em; }
+h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); margin: 1.6em 0 .5em; }
+h3 { font-size: clamp(1.2rem, 2.4vw, 1.5rem); margin: 1.4em 0 .4em; }
+h4 { font-size: 1.15rem; margin: 1.2em 0 .3em; }
+
+.skip-link { position: absolute; left: -999px; top: 8px; background: #fff; padding: 8px 12px; z-index: 100; }
+.skip-link:focus { left: 8px; }
+
+/* ---- Page content (the Markdown) ---------------------------------------------------- */
+.content {
+  width: var(--read);
+  margin: 0 auto;
+  padding: 32px 0 64px;
+  overflow-wrap: anywhere;
+}
+.content p { margin: 0 0 1.05em; }
+.content ul, .content ol { padding-left: 1.3em; margin: 0 0 1.2em; }
+.content li { margin: .25em 0; }
+
+/* Section breaks from Wix become a small gold rule */
+.content hr {
+  border: 0;
+  height: 2px;
+  width: 72px;
+  background: var(--gold);
+  margin: 48px auto;
+}
+
+/* Photos on their own fill the text column */
+.content p > img,
+.content p > a > img {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  margin: 8px 0;
+}
+
+/* Galleries and rows of photos spread wider than the text */
+.content .gallery,
+.content .photo-row {
+  width: min(1180px, 100vw - 32px);
+  margin: 24px 0 32px 50%;
+  transform: translateX(-50%);
+}
+.content .gallery p,
+.content .photo-row p {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(230px, 45vw), 1fr));
+  gap: 10px;
+  margin: 0;
+}
+.content .photo-row p { grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); align-items: start; }
+.content .gallery img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: zoom-in;
+  margin: 0;
+}
+.content .photo-row img { width: 100%; border-radius: 6px; margin: 0; }
+.content .gallery a, .content .photo-row a { display: block; }
+
+/* Buttons (Wix buttons) */
+.buttons { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 20px 0 28px; }
+.button {
+  display: inline-block;
+  background: var(--olive);
+  color: #fff;
+  text-decoration: none;
+  padding: 11px 22px;
+  border-radius: 999px;
+  font-weight: 500;
+  letter-spacing: .02em;
+  transition: background .15s;
+}
+.button:hover { background: var(--olive-dark); color: #fff; }
+.button.gold { background: var(--gold-dark); }
+.button.gold:hover { background: #8f6b26; }
+
+.video { position: relative; aspect-ratio: 16 / 9; margin: 20px 0; }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 6px; }
+
+/* Lightbox for gallery photos */
+dialog.lightbox {
+  border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 94vh;
+}
+dialog.lightbox::backdrop { background: rgba(20, 16, 14, .9); }
+dialog.lightbox img { display: block; max-width: 96vw; max-height: 90vh; width: auto; height: auto; border-radius: 4px; }
+dialog.lightbox button {
+  position: fixed; top: 12px; right: 16px; font-size: 2rem; line-height: 1; background: none; color: #fff;
+  border: 0; cursor: pointer;
+}
+dialog.lightbox .nav { top: 50%; right: auto; transform: translateY(-50%); font-size: 2.6rem; padding: 12px; }
+dialog.lightbox .prev { left: 6px; }
+dialog.lightbox .next { left: auto; right: 6px; }
+
+/* Centered blocks and red notices carried over from the Wix pages */
+.content .center { text-align: center; }
+.content .center p > img, .content .center p > a > img { margin-left: auto; margin-right: auto; }
+.content .alert { color: #9b1c1c; }
+.content .alert a { color: inherit; }
+
+/* Headings that are links (common on the Wix pages): no heavy underline */
+.content h1 a, .content h2 a, .content h3 a { text-decoration: none; color: inherit; }
+.content h1 a:hover, .content h2 a:hover, .content h3 a:hover { color: var(--gold-dark); }

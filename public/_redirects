@@ -1,0 +1,8 @@
+# Cloudflare Pages redirects: old Wix addresses that no longer have their own page.
+# Format: old-address  new-address  301   (301 tells Google the move is permanent)
+/about-3                /weddings                                   301
+/blank-page-1           /                                           301
+/sitemap                /                                           301
+/book-online            https://thehoweranchregistration.com/       301
+/service-page/*         https://thehoweranchregistration.com/       301
+/booking-calendar/*     https://thehoweranchregistration.com/       301

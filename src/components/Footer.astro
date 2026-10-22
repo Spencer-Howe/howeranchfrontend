@@ -1,0 +1,37 @@
+---
+// Contact details and links from src/data/site.ts.
+import { contact, social, BOOKING_SITE } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="cols">
+    <div>
+      <p class="name">Howe Ranch</p>
+      <p>{contact.street}<br />{contact.city}, {contact.region} {contact.postalCode}</p>
+    </div>
+    <div>
+      <p><a href={contact.phoneHref}>{contact.phone}</a><br /><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
+      <p>{social.map((s, i) => <>{i > 0 && ' · '}<a href={s.href} rel="noopener">{s.label}</a></>)}</p>
+    </div>
+    <div>
+      <p><a href={BOOKING_SITE}>Book an experience</a><br /><a href="/faqs">FAQs</a><br /><a href="/reviews">Reviews</a></p>
+    </div>
+  </div>
+  <p class="copy">© {year} Howe Ranch · Kalispell, Montana</p>
+</footer>
+
+<style>
+  .site-footer { background: var(--brown); color: #e9e1d6; padding: 40px 0 24px; margin-top: 40px; }
+  .cols {
+    width: var(--page);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 8px 32px;
+  }
+  .site-footer p { margin: 0 0 12px; }
+  .site-footer a { color: #f3ede4; text-decoration: none; }
+  .site-footer a:hover { color: var(--gold); text-decoration: underline; }
+  .name { font: 300 1.2rem 'Poppins', sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+  .copy { width: var(--page); margin: 16px auto 0 !important; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: .85rem; color: #b9ada0; }
+</style>

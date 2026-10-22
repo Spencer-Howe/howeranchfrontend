@@ -1,0 +1,160 @@
+---
+// Logo, menu (from src/data/site.ts) and the Book Now button. Desktop: dropdowns open on hover or
+// keyboard focus. Phones: one "Menu" button that opens the full list. No JavaScript needed.
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo.jpg';
+import { menu, BOOKING_SITE } from '../data/site';
+
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => href === path;
+---
+<header class="site-header">
+  <div class="bar">
+    <a href="/" class="brand" aria-label="Howe Ranch home">
+      <Image src={logo} alt="Howe Ranch, Kalispell, Montana" width={64} height={60} layout="fixed" loading="eager" />
+      <span>Howe Ranch</span>
+    </a>
+
+    <nav class="desktop" aria-label="Main">
+      <ul>
+        {menu.map((item) =>
+          'items' in item ? (
+            <li class="group">
+              <button type="button" aria-haspopup="true">{item.label} <span aria-hidden="true">▾</span></button>
+              <ul>
+                {item.items.map((l) => (
+                  <li><a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a></li>
+                ))}
+              </ul>
+            </li>
+          ) : (
+            <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
+          )
+        )}
+      </ul>
+    </nav>
+
+    <a class="book" href={BOOKING_SITE}>Book Now</a>
+
+    <details class="mobile">
+      <summary>Menu</summary>
+      <nav aria-label="Main">
+        <ul>
+          {menu.flatMap((item) => ('items' in item ? item.items : [item])).map((l) => (
+            <li><a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a></li>
+          ))}
+          <li><a class="book-mobile" href={BOOKING_SITE}>Book Now</a></li>
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--brown);
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+  }
+  .bar {
+    width: var(--page);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 72px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; flex-shrink: 0; }
+  .brand :global(img) { border-radius: 50%; width: 52px; height: 52px; object-fit: cover; background: #fff; }
+  .brand span { font: 300 1.25rem 'Poppins', sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+
+  nav.desktop { margin-left: auto; }
+  nav.desktop > ul { display: flex; gap: 2px; list-style: none; margin: 0; padding: 0; }
+  nav.desktop a, nav.desktop button {
+    display: block;
+    color: #f3ede4;
+    text-decoration: none;
+    font: 500 .95rem 'Jost', sans-serif;
+    padding: 10px 12px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  nav.desktop a:hover, nav.desktop button:hover, nav.desktop a[aria-current] { color: var(--gold); }
+  .group { position: relative; }
+  .group ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    list-style: none;
+    margin: 0;
+    padding: 6px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+  }
+  .group ul a { color: var(--brown); }
+  .group ul a:hover { background: var(--sand); color: var(--brown); }
+  .group:hover ul, .group:focus-within ul { display: block; }
+
+  .book {
+    background: var(--gold);
+    color: var(--brown);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .book:hover { background: #e0c084; color: var(--brown); }
+
+  details.mobile { display: none; margin-left: auto; }
+  details.mobile summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 255, 255, .4);
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  details.mobile summary::-webkit-details-marker { display: none; }
+  details.mobile nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: var(--brown);
+    padding: 8px 16px 18px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, .25);
+    max-height: calc(100vh - 72px);
+    overflow-y: auto;
+  }
+  details.mobile ul { list-style: none; margin: 0; padding: 0; }
+  details.mobile a {
+    display: block;
+    color: #f3ede4;
+    text-decoration: none;
+    padding: 11px 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    font-size: 1.05rem;
+  }
+  details.mobile a[aria-current] { color: var(--gold); }
+  details.mobile .book-mobile { color: var(--gold); font-weight: 600; border-bottom: 0; }
+
+  @media (max-width: 1080px) {
+    nav.desktop { display: none; }
+    details.mobile { display: block; }
+    .book { margin-left: auto; }
+    details.mobile { margin-left: 0; }
+  }
+  @media (max-width: 420px) {
+    .brand span { display: none; }
+  }
+</style>

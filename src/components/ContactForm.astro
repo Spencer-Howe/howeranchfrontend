@@ -1,0 +1,74 @@
+---
+// The contact forms from the Wix site (same fields). Messages go to the booking app, which adds
+// them to Admin > Leads and emails the ranch (CONTACT_ENDPOINT in src/data/site.ts).
+import { CONTACT_ENDPOINT, contact } from '../data/site';
+
+interface Props { kind: 'contact' | 'animals' }
+const { kind } = Astro.props;
+const id = `form-${kind}`;
+---
+<section class="contact-form" aria-labelledby={`${id}-title`}>
+  <h2 id={`${id}-title`}>{kind === 'animals' ? 'Ask About Our Animals' : 'Send Us a Message'}</h2>
+  <form id={id} data-endpoint={CONTACT_ENDPOINT} data-kind={kind} novalidate>
+    {kind === 'animals' ? (
+      <div class="row">
+        <label>First Name<input name="first_name" autocomplete="given-name" required /></label>
+        <label>Last Name<input name="last_name" autocomplete="family-name" /></label>
+      </div>
+    ) : (
+      <label>Name<input name="name" autocomplete="name" placeholder="Enter your name" required /></label>
+    )}
+    <label>Email<input name="email" type="email" autocomplete="email" placeholder="Enter your email" required /></label>
+    {kind === 'contact' && <label>Subject<input name="subject" placeholder="Type the subject" /></label>}
+    <label>Message<textarea name="message" rows="5" placeholder="Type your message here..." required></textarea></label>
+    <!-- Bot trap: hidden from people -->
+    <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="trap" />
+    <input name="form_ts" type="hidden" />
+    <button class="button" type="submit">Submit</button>
+    <p class="status" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
+<script define:vars={{ id, email: contact.email }}>
+  const form = document.getElementById(id);
+  const status = form.querySelector('.status');
+  form.elements.form_ts.value = Date.now();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const data = Object.fromEntries(new FormData(form));
+    data.page = location.pathname;
+    data.kind = form.dataset.kind;
+    const button = form.querySelector('button');
+    button.disabled = true;
+    status.textContent = 'Sending...';
+    try {
+      const r = await fetch(form.dataset.endpoint, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data),
+      });
+      if (!r.ok) throw new Error(String(r.status));
+      form.reset();
+      status.textContent = 'Thanks for submitting! We\'ll be in touch soon.';
+    } catch (err) {
+      status.innerHTML = `Sorry, that didn't send. Please email us at <a href="mailto:${email}">${email}</a>.`;
+    }
+    button.disabled = false;
+  });
+</script>
+
+<style>
+  .contact-form { background: var(--sand); border-radius: 12px; padding: 24px; margin: 40px 0 0; }
+  .contact-form h2 { margin-top: 0; }
+  form { display: grid; gap: 14px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  label { display: grid; gap: 4px; font-weight: 500; font-size: .95rem; }
+  input, textarea {
+    font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff;
+    color: var(--brown); width: 100%;
+  }
+  input:focus, textarea:focus { outline: 2px solid var(--gold); border-color: var(--gold); }
+  .trap { position: absolute; left: -5000px; width: 1px; height: 1px; }
+  button { justify-self: start; border: 0; cursor: pointer; font: inherit; font-weight: 500; }
+  .status { margin: 0; min-height: 1.4em; }
+  @media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
+</style>
