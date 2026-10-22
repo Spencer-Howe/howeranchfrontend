@@ -77,14 +77,11 @@ Private Holiday Farm Animal Extravaganza with baby cow kisses and cuddles includ
 
 </div>
 
-<div class="center">
+Step into the magic of Howe Ranch's 17th Annual Winter Wonderland, where eight enchanting holiday-themed areas create a whimsical Christmas experience filled with warmth, joy, and unforgettable memories!
 
-Reserve your spot now for our 17th annual Winter Wonderland at the ranch—an afternoon filled with warmth, joy, and a heap of seasonal magic that will bring your group closer together with five magical areas to explore - all included:
+Explore the Grand Hall, German Christmas Market, Candyland, Miniature North Pole & Santa's Workshop, Frozen Kingdom, Gingerbread Village, Santa's Post, Whoville, and several more surprise areas!
 
-</div>
-
-- Winter Wonderland Traditions: The hot drinks bar (hot chocolate or tea and apple cider) in our curated Christmas Market.
-- Games and Activities: Foster team spirit with our winter-themed games and activities. From a traditional Scavenger Hunt to a trip to the miniature North Pole Village, your team can earn Wonderland bucks and win prizes you provide while enjoying the festive atmosphere.
+Your private celebration also includes baby Highland cow cuddles, friendly farm animal encounters, festive games, a holiday scavenger hunt with prizes, and complimentary arts-and-crafts souvenirs, the traditional holidaze spread, and craft drinks—all wrapped in our family's signature holiday hospitality.
 
 <div class="center">
 
@@ -157,7 +154,7 @@ Warm up with a delightful selection of festive beverages, all included in your p
 
 <div class="center">
 
-## Winter Wonderland Celebration
+## Ready to book?
 
 </div>
 
@@ -191,8 +188,7 @@ Winter Wonderland Celebration Pricing
 We will prepare your quote within 24 hours if all pertinent information is provided.
 
 <div class="buttons">
-<a class="button gold" href="https://thehoweranchregistration.com/private-winter-wonderland">Request Your Date Online</a>
-<a class="button" href="mailto:howeranchservices@gmail.com?subject=Private%20Winter%20Wonderland%20Celebration">BOOK</a>
+<a class="button" href="https://thehoweranchregistration.com/private-winter-wonderland">BOOK</a>
 </div>
 
 <div class="center">
