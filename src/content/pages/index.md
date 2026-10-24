@@ -4,11 +4,21 @@ description: "Howe Ranch: a private boutique farm in Kalispell, Montana. Mini Hi
 form: contact  # adds the contact form at the bottom
 ---
 
+<div class="band band-hero">
+
+<div class="kicker-line">
+
 Baby Time!
+
+</div>
+
+<div class="split">
+<div class="split-media">
 
 [![Magical Moments with Mini Moos Website Leader Banner F](../../assets/photos/home/magical-moments-with-mini-moos-website-leader-ba-bcb2f5.jpg)](https://thehoweranchregistration.com/)
 
----
+</div>
+<div class="split-text">
 
 <div class="center">
 
@@ -20,7 +30,13 @@ Programming at our previous farm location Wildomar closed in June, and we’ve b
 
 And, from November 1 through January 31, a limited number of [Christmas Inn at Howe Ranch](https://thehoweranchregistration.com/) stays are available during our most magical season of the year — [Winter Wonderland](https://thehoweranchregistration.com/winter-wonderland). Reserve your [Winter Wonderland stay ](https://thehoweranchregistration.com/christmas-inn)now. NOTE: Limited passes available for our [17th Annual Winter Wonderland events](https://thehoweranchregistration.com/winter-wonderland) at the farm. [Reserve your passes now](https://thehoweranchregistration.com/winter-wonderland) if you would like to come for an event!
 
-<div class="center">
+</div>
+</div>
+</div>
+
+<div class="band band-notice">
+
+<div class="notice">
 
 <span class="alert">[All Farm Experiences are by ](https://thehoweranchregistration.com/)[Advance Online Reservation](https://thehoweranchregistration.com/)[ only.](https://thehoweranchregistration.com/)[\*](https://thehoweranchregistration.com/)</span>
 
@@ -40,13 +56,26 @@ Important! Prior to booking, guests new to the farm review [Farm](/_files/ugd/fc
 
 [.No refunds](https://thehoweranchregistration.com/)
 
+</div>
+</div>
+
+<div class="band band-dark">
+
+<div class="center">
+
 # [Currently Available Experiences - Scroll Down:](https://thehoweranchregistration.com/)
 
 [Explore & Book Your Magical Visit Below](https://thehoweranchregistration.com/)
 
 </div>
 
+<div class="split split-menu">
+<div class="split-media">
+
 [![Magic Mini Moo Falling into Winter Wonderland Slide !](../../assets/photos/home/magic-mini-moo-falling-into-winter-wonderland-sl-6d03f5.jpg)](https://thehoweranchregistration.com/mini-moo-magic)
+
+</div>
+<div class="split-text">
 
 <div class="buttons">
 <a class="button" href="https://thehoweranchregistration.com/mini-moo-magic">Mini Moo Magic with Photos</a>
@@ -57,6 +86,9 @@ Important! Prior to booking, guests new to the farm review [Farm](/_files/ugd/fc
 <a class="button" href="https://thehoweranchregistration.com">Spooky Moo Halloweentown</a>
 <a class="button" href="/photos">Photo Albums</a>
 <a class="button" href="/media">Media</a>
+</div>
+
+</div>
 </div>
 
 <div class="photo-row">
@@ -72,6 +104,13 @@ Important! Prior to booking, guests new to the farm review [Farm](/_files/ugd/fc
 
 See more photos of Winter Wonderland, our Christmas Inn experience, and the Fairytale Farm Village on our [Photo Page](/photos).
 
+</div>
+</div>
+
+<div class="band band-sand">
+
+<div class="coming">
+
 Coming Back this Fall:
 
 Mini Moo Magic
@@ -82,7 +121,11 @@ Private Mini Moo Express Gathering
 
 Milestone Celebrations at Howe Ranch
 
+</div>
+
 ------
+
+<div class="notice policy">
 
 Private Road. Private Property. 
 
@@ -95,26 +138,39 @@ Because our team is fully dedicated to caring for the animals and hosting schedu
 All farm visits are scheduled <span class="alert">at least 24 hours in advance</span> due to strict <span class="alert">liability regulations</span> (we must staff a safety trained facilitator), and cannot be refunded or changed to a new date once booked because your visit will be blocked for you and resources committed. No exceptions, policies apply to all guests equally.
 
 </div>
+</div>
 
----
+<div class="band">
 
-Inside the Luxury Farm Lifestyle:
+<div class="split">
+<div class="split-text">
 
-<div class="center">
+<p class="kicker">Inside the Luxury Farm Lifestyle:</p>
 
 Escape to Howe Ranch for a magical get away at this private animal farm nestled in the foothills of the Rocky Mountains. Experience farm life with boutique [Farm Animal Encounters](https://thehoweranchregistration.com), plan a Rustic Gathering with stunning city and mountain views, a [dream Montana wedding](/weddings), or a unique escape from urban life. Our activities directly support the care of our specialty bred [miniature animals](/photos) and rescues. Learn more about our animals here: [Howe Ranch Herd](/animals). Howe Ranch is located in the foothills of Glacier National Park in Kalispell, MT. The day visit experiences offered at the farm are wheelchair accessible (overnight accommodations are on the second floor), and we operate rain, snow or shine. Experiences will only be rescheduled if there is a safety concern (i.e. earthquake, flooding, unsafe wind) affecting the farm. For details reference our [Weather Polic](/_files/ugd/fca21d_8ac7b55be446452b9a4d5fe50bf7dfda.pdf)y.
 
 <span class="alert">\*</span>Visitors must acknowledge the <span class="alert">[Howe Ranch Visitor Waiver](/_files/ugd/fca21d_300537120216453b9e1d814c44472a4b.pdf), </span>our <span class="alert">[FAQs](/faqs),</span><span class="alert"> [Farm Policies](/_files/ugd/fca21d_a30cd343d96b4be3913cded96c226b9f.pdf) </span>and our<span class="alert"> [Farm Gathering Rules](/_files/ugd/fca21d_59bbce27ea454f1ea0772b99fc929429.pdf)</span> prior to booking.
 
 </div>
+<div class="split-media">
 
 [![Weddings at Howe Ranch Overview](../../assets/photos/home/weddings-at-howe-ranch-overview-da9f85.jpg)](/weddings)
 
----
+</div>
+</div>
+</div>
+
+<div class="band band-sand">
+
+<div class="split split-flip">
+<div class="split-media">
 
 [![Howe Ranch at Howe Ranch](../../assets/photos/home/home-2-b5b0db.jpg)](https://thehoweranchregistration.com/)
 
-<div class="center">
+</div>
+<div class="split-text">
+
+<div class="tagline">
 
 Baby Moo Magic… where love, wonder, and sweet moments come to life.
 
@@ -133,6 +189,12 @@ Most photos below are of our beloved Howe Ranch in a small town in California ca
 <div class="buttons">
 <a class="button" href="/events">Photos</a>
 </div>
+
+</div>
+</div>
+</div>
+
+<div class="band band-mosaic">
 
 <div class="gallery">
 
@@ -164,10 +226,14 @@ Most photos below are of our beloved Howe Ranch in a small town in California ca
 
 </div>
 
----
+</div>
+
+<div class="band band-close">
 
 <div class="center">
 
 ## Come on up to the Ranch!
+
+</div>
 
 </div>

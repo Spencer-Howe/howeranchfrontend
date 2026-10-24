@@ -72,6 +72,19 @@ const business = {
       <button class="nav next" type="button" aria-label="Next photo">›</button>
     </dialog>
     <script>
+      // Photo rows: give each photo a share of the row matching its shape, so they line up at one height
+      // without cropping (see .photo-row.even in global.css). Width/height come from the image tags.
+      document.querySelectorAll<HTMLElement>('.photo-row').forEach((row) => {
+        const p = row.querySelector('p');
+        if (!p) return;
+        for (const item of Array.from(p.children) as HTMLElement[]) {
+          const img = item.matches('img') ? item as HTMLImageElement : item.querySelector('img');
+          const w = Number(img?.getAttribute('width')), h = Number(img?.getAttribute('height'));
+          if (w && h) item.style.setProperty('--r', String(w / h));
+        }
+        row.classList.add('even');
+      });
+
       // Tap a gallery photo to see it large; arrows / swipe to move through the gallery.
       const dialog = document.querySelector('dialog.lightbox') as HTMLDialogElement;
       const big = dialog.querySelector('img') as HTMLImageElement;

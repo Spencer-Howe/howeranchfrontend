@@ -1,4 +1,5 @@
-/* Howe Ranch: colors and type taken from the Wix theme (Futura -> Jost, Poppins ExtraLight headings) */
+/* Howe Ranch: colors and type taken from the Wix theme (Futura -> Jost, Poppins ExtraLight headings).
+   This file only changes how pages look; every page's words, photos and order come from its Markdown file. */
 @import '@fontsource/jost/400.css';
 @import '@fontsource/jost/500.css';
 @import '@fontsource/jost/600.css';
@@ -6,147 +7,394 @@
 @import '@fontsource/poppins/300.css';
 
 :root {
-  --brown: #27211e;      /* text, header */
+  --brown: #27211e;      /* header, footer, headings */
   --brown-2: #4e413a;
+  --ink: #33291f;        /* body text: a touch softer than the headings */
   --olive: #727557;      /* buttons, accents */
   --olive-dark: #4c4e3a;
   --gold: #d0ac68;       /* highlights */
   --gold-dark: #b28838;
+  --gold-soft: #f1e3c4;
   --cream: #faf8f4;      /* page background */
   --sand: #efe9df;       /* panels */
-  --line: #ded5c8;
+  --line: #e2d9cc;
   --muted: #6b605a;
+  --alert: #a3202d;      /* the red notices from Wix */
   --page: min(1180px, 100% - 32px);
-  --read: min(760px, 100% - 32px);
+  --read: min(780px, 100% - 40px);
+  --wide: min(1040px, 100vw - 32px);
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(39, 33, 30, .06), 0 18px 40px -22px rgba(39, 33, 30, .45);
+  --shadow-lift: 0 2px 4px rgba(39, 33, 30, .06), 0 30px 60px -26px rgba(39, 33, 30, .55);
+  --ease: cubic-bezier(.2, .7, .2, 1);
 }
 
 * { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 96px; }
 
 body {
   margin: 0;
-  background: var(--cream);
-  color: var(--brown);
-  font: 400 1.0625rem/1.7 'Jost', system-ui, sans-serif;
+  color: var(--ink);
+  font: 400 clamp(1.0625rem, .98rem + .3vw, 1.1875rem)/1.75 'Jost', system-ui, sans-serif;
+  letter-spacing: .005em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Cream paper with a whisper of grain */
+  background-color: var(--cream);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .22 0 0 0 0 .15 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-a { color: var(--olive-dark); text-underline-offset: 3px; }
-a:hover { color: var(--gold-dark); }
+::selection { background: var(--gold-soft); color: var(--brown); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+
+a {
+  color: var(--olive-dark);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--gold) 70%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color .2s, text-decoration-color .2s;
+}
+a:hover { color: var(--gold-dark); text-decoration-color: currentColor; }
 
 img { max-width: 100%; height: auto; }
 
 h1, h2, h3, h4 {
   font-family: 'Poppins', 'Jost', sans-serif;
   font-weight: 300;
-  line-height: 1.25;
-  letter-spacing: .01em;
+  line-height: 1.2;
+  letter-spacing: -.005em;
   color: var(--brown);
   text-wrap: balance;
 }
-h1 { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 200; margin: .2em 0 .5em; }
-h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); margin: 1.6em 0 .5em; }
-h3 { font-size: clamp(1.2rem, 2.4vw, 1.5rem); margin: 1.4em 0 .4em; }
-h4 { font-size: 1.15rem; margin: 1.2em 0 .3em; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 200; line-height: 1.1; margin: .2em 0 .55em; }
+h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); font-weight: 200; margin: 1.7em 0 .55em; }
+h3 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin: 1.5em 0 .45em; }
+h4 { font-size: 1.2rem; margin: 1.3em 0 .35em; }
 
 .skip-link { position: absolute; left: -999px; top: 8px; background: #fff; padding: 8px 12px; z-index: 100; }
 .skip-link:focus { left: 8px; }
+
+/* Smooth cross-fade between pages (the header stays put); browsers without it just load the page */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
 
 /* ---- Page content (the Markdown) ---------------------------------------------------- */
 .content {
   width: var(--read);
   margin: 0 auto;
-  padding: 32px 0 64px;
+  padding: clamp(40px, 6vw, 72px) 0 clamp(64px, 8vw, 104px);
   overflow-wrap: anywhere;
 }
-.content p { margin: 0 0 1.05em; }
-.content ul, .content ol { padding-left: 1.3em; margin: 0 0 1.2em; }
-.content li { margin: .25em 0; }
+.content p { margin: 0 0 1.15em; }
+.content strong { font-weight: 600; color: var(--brown); }
+.content ul, .content ol { padding-left: 1.4em; margin: 0 0 1.3em; }
+.content li { margin: .35em 0; padding-left: .2em; }
+.content li::marker { color: var(--gold-dark); }
+.content ol li::marker { font-weight: 600; }
 
-/* Section breaks from Wix become a small gold rule */
+/* The opening of each page rises in gently */
+.content > :nth-child(-n + 4) { animation: rise .8s var(--ease) both; }
+.content > :nth-child(2) { animation-delay: .08s; }
+.content > :nth-child(3) { animation-delay: .16s; }
+.content > :nth-child(4) { animation-delay: .24s; }
+@keyframes rise { from { opacity: 0; translate: 0 18px; } }
+
+/* Section breaks: a fine gold rule with a small diamond in the middle */
 .content hr {
+  position: relative;
   border: 0;
-  height: 2px;
-  width: 72px;
+  height: 9px;
+  width: 132px;
+  margin: clamp(48px, 7vw, 80px) auto;
+  overflow: visible;
+  background:
+    linear-gradient(var(--gold), var(--gold)) left center / 54px 1px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) right center / 54px 1px no-repeat;
+}
+.content hr::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 7px; height: 7px;
   background: var(--gold);
-  margin: 48px auto;
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
-/* Photos on their own fill the text column */
-.content p > img,
-.content p > a > img {
-  display: block;
-  width: 100%;
-  border-radius: 6px;
-  margin: 8px 0;
+/* Photos on their own: wider than the text, rounded, softly lifted. Tall photos keep to the screen height. */
+.content :where(p:has(> img:only-child), p:has(> a:only-child > img:only-child)) {
+  width: var(--wide);
+  margin: clamp(28px, 4vw, 44px) 0 clamp(28px, 4vw, 44px) 50%;
+  transform: translateX(-50%);
+  text-align: center;
 }
+.content :where(p > img:only-child, p > a:only-child > img:only-child) {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: min(88vh, 1100px);
+  margin: 0 auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.content :where(p > a:only-child) { display: inline-block; border-radius: var(--radius); }
+.content a > img { transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+.content a:hover > img { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
 
 /* Galleries and rows of photos spread wider than the text */
 .content .gallery,
 .content .photo-row {
-  width: min(1180px, 100vw - 32px);
-  margin: 24px 0 32px 50%;
+  width: var(--wide);
+  margin: clamp(28px, 4vw, 44px) 0 clamp(32px, 4vw, 52px) 50%;
   transform: translateX(-50%);
 }
 .content .gallery p,
-.content .photo-row p {
+.content .photo-row p { margin: 0; }
+
+/* Gallery: even squares, tap to enlarge */
+.content .gallery p {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(230px, 45vw), 1fr));
-  gap: 10px;
-  margin: 0;
+  grid-template-columns: repeat(auto-fill, minmax(min(210px, 44vw), 1fr));
+  gap: 12px;
 }
-.content .photo-row p { grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); align-items: start; }
 .content .gallery img {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: zoom-in;
   margin: 0;
+  box-shadow: 0 10px 24px -18px rgba(39, 33, 30, .6);
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease), filter .45s;
 }
-.content .photo-row img { width: 100%; border-radius: 6px; margin: 0; }
-.content .gallery a, .content .photo-row a { display: block; }
+.content .gallery img:hover { transform: translateY(-3px) scale(1.02); box-shadow: var(--shadow-lift); filter: saturate(1.08); }
+
+/* Photo rows: side by side at one even height, nothing cropped (posters keep all their text).
+   The page script sets each photo's shape (--r); without it they sit in a simple grid. */
+.content .photo-row p { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 14px; align-items: start; }
+.content .photo-row img { width: 100%; border-radius: 12px; margin: 0; box-shadow: var(--shadow); }
+.content .photo-row a { display: block; border-radius: 12px; }
+@media (min-width: 640px) {
+  .content .photo-row.even p { display: flex; align-items: flex-start; }
+  .content .photo-row.even p > * { flex: var(--r, 1) 1 0; min-width: 0; }
+}
 
 /* Buttons (Wix buttons) */
-.buttons { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 20px 0 28px; }
+.buttons { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 28px 0 36px; }
 .button {
-  display: inline-block;
-  background: var(--olive);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  background: linear-gradient(180deg, #7d8061 0%, var(--olive) 100%);
   color: #fff;
   text-decoration: none;
-  padding: 11px 22px;
+  padding: 12px 26px;
   border-radius: 999px;
   font-weight: 500;
-  letter-spacing: .02em;
-  transition: background .15s;
+  font-size: .98rem;
+  letter-spacing: .03em;
+  line-height: 1.25;
+  text-align: center;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .18) inset, 0 8px 18px -10px rgba(76, 78, 58, .8);
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s;
 }
-.button:hover { background: var(--olive-dark); color: #fff; }
-.button.gold { background: var(--gold-dark); }
-.button.gold:hover { background: #8f6b26; }
+.button:hover {
+  color: #fff;
+  background: linear-gradient(180deg, var(--olive) 0%, var(--olive-dark) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .18) inset, 0 14px 26px -12px rgba(76, 78, 58, .9);
+}
+.button:active { transform: translateY(0); }
+.button.gold { background: linear-gradient(180deg, #dcbb7c 0%, var(--gold-dark) 100%); color: var(--brown); }
+.button.gold:hover { background: linear-gradient(180deg, var(--gold) 0%, #9a7530 100%); color: var(--brown); }
 
-.video { position: relative; aspect-ratio: 16 / 9; margin: 20px 0; }
-.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 6px; }
+.video { position: relative; aspect-ratio: 16 / 9; margin: 28px 0; }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: var(--radius); box-shadow: var(--shadow); }
 
 /* Lightbox for gallery photos */
 dialog.lightbox {
-  border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 94vh;
+  border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 94vh; overflow: visible;
 }
-dialog.lightbox::backdrop { background: rgba(20, 16, 14, .9); }
-dialog.lightbox img { display: block; max-width: 96vw; max-height: 90vh; width: auto; height: auto; border-radius: 4px; }
+dialog.lightbox[open] { animation: zoom-in .35s var(--ease); }
+dialog.lightbox::backdrop { background: rgba(20, 16, 14, .88); backdrop-filter: blur(8px); }
+@keyframes zoom-in { from { opacity: 0; transform: scale(.96); } }
+dialog.lightbox img { display: block; max-width: 96vw; max-height: 90vh; width: auto; height: auto; border-radius: 10px; box-shadow: 0 30px 80px rgba(0, 0, 0, .5); }
 dialog.lightbox button {
-  position: fixed; top: 12px; right: 16px; font-size: 2rem; line-height: 1; background: none; color: #fff;
-  border: 0; cursor: pointer;
+  position: fixed; top: 14px; right: 16px; width: 48px; height: 48px; display: grid; place-items: center;
+  font-size: 1.9rem; line-height: 1; background: rgba(255, 255, 255, .1); color: #fff;
+  border: 1px solid rgba(255, 255, 255, .2); border-radius: 50%; cursor: pointer; transition: background .2s;
 }
-dialog.lightbox .nav { top: 50%; right: auto; transform: translateY(-50%); font-size: 2.6rem; padding: 12px; }
-dialog.lightbox .prev { left: 6px; }
-dialog.lightbox .next { left: auto; right: 6px; }
+dialog.lightbox button:hover { background: rgba(255, 255, 255, .22); }
+dialog.lightbox .nav { top: 50%; right: auto; transform: translateY(-50%); font-size: 2.2rem; }
+dialog.lightbox .prev { left: 14px; }
+dialog.lightbox .next { left: auto; right: 14px; }
 
 /* Centered blocks and red notices carried over from the Wix pages */
 .content .center { text-align: center; }
+.content .center p { text-wrap: pretty; }
 .content .center p > img, .content .center p > a > img { margin-left: auto; margin-right: auto; }
-.content .alert { color: #9b1c1c; }
-.content .alert a { color: inherit; }
+.content .alert { color: var(--alert); font-weight: 500; }
+.content .alert a { color: inherit; text-decoration-color: color-mix(in srgb, var(--alert) 45%, transparent); }
 
 /* Headings that are links (common on the Wix pages): no heavy underline */
 .content h1 a, .content h2 a, .content h3 a { text-decoration: none; color: inherit; }
 .content h1 a:hover, .content h2 a:hover, .content h3 a:hover { color: var(--gold-dark); }
+
+/* Photos ease in as they scroll into view (CSS only; browsers without it just show them) */
+@supports (animation-timeline: view()) {
+  .content img {
+    animation: photo-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 28%;
+  }
+  @keyframes photo-in { from { opacity: 0; translate: 0 26px; } }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  @view-transition { navigation: none; }
+}
+
+/* ---- Page sections ------------------------------------------------------------------------
+   Optional wrappers a page can use to lay out its own words and photos (see index.md):
+     <div class="band">            full-width section (add band-sand, band-dark, band-hero, band-notice,
+                                   band-mosaic, band-close for its look)
+     <div class="split">           two columns: <div class="split-media"> beside <div class="split-text">
+                                   (split-flip puts the photo on the right on wide screens... see below)
+     <div class="notice">          a card for important notices and policies
+     <div class="coming">          first line is a label, the following lines show as tags
+     <div class="kicker-line">     a small spaced-out label line
+   The words inside stay exactly as written; these only change the layout. */
+html, body { overflow-x: clip; }
+.content:has(> .band:first-child) { padding-top: 0; }
+.content:has(> .band:last-child) { padding-bottom: 0; }
+.content > .band:last-child + * { margin-bottom: 72px; }
+
+.band {
+  --band-pad: clamp(64px, 9vw, 120px);
+  display: grid;
+  grid-template-columns: 1fr min(1160px, 100vw - 40px) 1fr;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: var(--band-pad) 0;
+  position: relative;
+}
+.band > * { grid-column: 2; }
+.band-sand { background: var(--sand); }
+.band-dark { background: radial-gradient(120% 90% at 50% 0%, #3a302a 0%, var(--brown) 65%); color: #e9e1d6; }
+.band-dark h1, .band-dark h2, .band-dark h3 { color: #fff; }
+.band-dark a:not(.button) { color: var(--gold); }
+.band-dark .center > p:first-child, .band-dark h1 { margin-top: 0; }
+
+/* Breaks between sections are the bands themselves */
+.band hr { display: none; }
+
+.kicker-line { text-align: center; }
+.kicker-line p, .content .kicker {
+  font: 600 .8rem/1 'Jost', sans-serif; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--gold-dark); margin: 0 0 28px;
+}
+
+/* Two columns */
+.split { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+@media (min-width: 900px) {
+  .split { grid-template-columns: 1.05fr 1fr; }
+  .band-hero .split { grid-template-columns: 1.25fr 1fr; }
+  /* The opening photo stays in view while the welcome text beside it scrolls */
+  .band-hero .split { align-items: start; }
+  .band-hero .split-media { position: sticky; top: 112px; }
+  .split-flip { grid-template-columns: .9fr 1.1fr; }
+  .split > .split-text:first-child { order: 0; }
+}
+.content .split-media p { width: auto; margin: 0; transform: none; }
+.content .split-media img { width: 100%; max-height: none; }
+.split-text > :first-child { margin-top: 0; }
+.split-text > :last-child { margin-bottom: 0; }
+
+/* Opening section */
+.band-hero { --band-pad: clamp(40px, 6vw, 80px); background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
+.band-hero .split-text .center p {
+  font: 200 clamp(1.9rem, 4vw, 3rem)/1.15 'Poppins', sans-serif; letter-spacing: .04em;
+  text-align: left; margin: 0 0 24px;
+}
+.band-hero .split-text .center .alert { font-weight: 300; }
+.band-hero .split-media img { border-radius: 20px; transform: rotate(-1deg); box-shadow: var(--shadow-lift); }
+.band-hero .split-media a:hover img { transform: rotate(0) translateY(-4px); }
+
+/* Notice cards */
+.band-notice { --band-pad: 0px; margin-top: clamp(-40px, -3vw, -24px); }
+.notice {
+  justify-self: center;
+  width: min(820px, 100%);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(28px, 4vw, 44px) clamp(22px, 4vw, 52px);
+  text-align: center;
+  box-shadow: var(--shadow-lift);
+  position: relative;
+}
+.notice::before {   /* gold diamond on the top edge */
+  content: ''; position: absolute; left: 50%; top: 0; width: 12px; height: 12px;
+  background: var(--gold); transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 0 6px #fff;
+}
+.notice p { margin: 0 0 .7em; }
+.notice p:last-child { margin-bottom: 0; }
+.notice .alert { font-size: 1.06em; }
+.notice.policy { margin-top: 8px; }
+.notice.policy p:first-child { font: 600 .8rem/1 'Jost', sans-serif; letter-spacing: .26em; text-transform: uppercase; color: var(--brown); margin-bottom: 18px; }
+
+/* The experiences: dark band, poster beside a menu of booking buttons */
+.band-dark h1 { font-size: clamp(2rem, 4.6vw, 3.4rem); margin-bottom: .3em; }
+.band-dark .split-menu { margin: clamp(32px, 5vw, 56px) 0; }
+.band-dark .split-menu .split-media img { border-radius: 16px; box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .8); }
+@media (min-width: 900px) { .band-dark .split-menu { grid-template-columns: .85fr 1fr; } }
+.split-menu .buttons { flex-direction: column; align-items: stretch; gap: 10px; margin: 0; }
+.split-menu .button {
+  justify-content: space-between;
+  min-height: 60px;
+  padding: 14px 24px;
+  font-size: 1.08rem;
+  text-align: left;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 14px;
+  box-shadow: none;
+  color: #f3ede4;
+}
+.split-menu .button::after { content: '→'; color: var(--gold); transition: transform .25s var(--ease); }
+.split-menu .button:hover { background: rgba(208, 172, 104, .14); border-color: var(--gold); color: #fff; box-shadow: none; }
+.split-menu .button:hover::after { transform: translateX(4px); }
+.band-dark .photo-row { width: 100%; transform: none; margin: 0 0 32px; }
+.band-dark .photo-row img { box-shadow: 0 24px 50px -24px rgba(0, 0, 0, .8); }
+
+/* "Coming back" tags */
+.coming { text-align: center; margin-bottom: 40px; }
+.coming p { margin: 0; }
+.coming p:first-child { font: 200 clamp(1.6rem, 3.4vw, 2.3rem)/1.2 'Poppins', sans-serif; color: var(--brown); margin-bottom: 22px; }
+.coming { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.coming p:first-child { flex-basis: 100%; }
+.coming p:not(:first-child) {
+  background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 10px 22px;
+  font-weight: 500; box-shadow: 0 6px 16px -12px rgba(39, 33, 30, .5);
+}
+
+/* Big quote line (Baby Moo Magic...) */
+.tagline p { font: 200 clamp(1.7rem, 3.6vw, 2.6rem)/1.2 'Poppins', sans-serif; color: var(--brown); text-align: left; margin: 0 0 24px; }
+.split-text .buttons { justify-content: flex-start; }
+.band .split-media img { border-radius: 18px; box-shadow: var(--shadow-lift); }
+.band-sand .split-flip .split-media img { max-height: 760px; object-fit: cover; }
+.split-text .center { text-align: left; }
+
+/* Gallery as a masonry wall: photos keep their own shapes, columns fill evenly */
+.band-mosaic { --band-pad: 0px; grid-template-columns: 10px 1fr 10px; padding: 10px 0 0; }
+.band-mosaic .gallery { width: 100%; transform: none; margin: 0; }
+.band-mosaic .gallery p { display: block; columns: 2; column-gap: 10px; }
+@media (min-width: 760px) { .band-mosaic .gallery p { columns: 4; } }
+@media (min-width: 1300px) { .band-mosaic .gallery p { columns: 5; } }
+.band-mosaic .gallery img { display: block; aspect-ratio: auto; width: 100%; height: auto; margin: 0 0 10px; border-radius: 10px; break-inside: avoid; }
+
+.band-close { --band-pad: clamp(56px, 8vw, 96px) 0 0; padding-bottom: 0; }
+.band-close h2 { font-size: clamp(2rem, 5vw, 3.4rem); margin: 0; }

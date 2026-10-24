@@ -1,19 +1,30 @@
 ---
 // Contact details and links from src/data/site.ts.
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo.jpg';
 import { contact, social, BOOKING_SITE } from '../data/site';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
+  <div class="top">
+    <a href="/" class="mark" aria-label="Howe Ranch home">
+      <Image src={logo} alt="" width={84} height={79} layout="fixed" />
+      <span>Howe Ranch</span>
+    </a>
+    <span class="rule" aria-hidden="true"></span>
+  </div>
   <div class="cols">
     <div>
-      <p class="name">Howe Ranch</p>
+      <p class="label">Visit</p>
       <p>{contact.street}<br />{contact.city}, {contact.region} {contact.postalCode}</p>
     </div>
     <div>
+      <p class="label">Get in touch</p>
       <p><a href={contact.phoneHref}>{contact.phone}</a><br /><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
-      <p>{social.map((s, i) => <>{i > 0 && ' · '}<a href={s.href} rel="noopener">{s.label}</a></>)}</p>
+      <p class="social">{social.map((s) => <a href={s.href} rel="noopener">{s.label}</a>)}</p>
     </div>
     <div>
+      <p class="label">Explore</p>
       <p><a href={BOOKING_SITE}>Book an experience</a><br /><a href="/faqs">FAQs</a><br /><a href="/reviews">Reviews</a></p>
     </div>
   </div>
@@ -21,17 +32,49 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
-  .site-footer { background: var(--brown); color: #e9e1d6; padding: 40px 0 24px; margin-top: 40px; }
+  .site-footer {
+    position: relative;
+    background: radial-gradient(120% 80% at 50% 0%, #352c27 0%, var(--brown) 60%);
+    color: #ddd3c6;
+    padding: 64px 0 28px;
+    font-size: 1rem;
+  }
+  .site-footer::before {   /* gold hairline across the top */
+    content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(208, 172, 104, .7), transparent);
+  }
+  .top { display: grid; justify-items: center; gap: 22px; margin-bottom: 44px; }
+  .mark { display: grid; justify-items: center; gap: 14px; color: #fff; text-decoration: none; }
+  .mark :global(img) {
+    width: 84px; height: 84px; border-radius: 50%; object-fit: cover; background: #fff;
+    box-shadow: 0 0 0 2px rgba(208, 172, 104, .8), 0 10px 30px rgba(0, 0, 0, .45);
+  }
+  .mark span { font: 300 1.3rem 'Poppins', sans-serif; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); padding-left: .32em; }
+  .rule {
+    position: relative; width: 132px; height: 9px;
+    background:
+      linear-gradient(var(--gold), var(--gold)) left center / 54px 1px no-repeat,
+      linear-gradient(var(--gold), var(--gold)) right center / 54px 1px no-repeat;
+  }
+  .rule::after { content: ''; position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; background: var(--gold); transform: translate(-50%, -50%) rotate(45deg); }
+
   .cols {
-    width: var(--page);
+    width: min(960px, 100% - 40px);
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 8px 32px;
+    gap: 20px 40px;
+    text-align: center;
   }
-  .site-footer p { margin: 0 0 12px; }
-  .site-footer a { color: #f3ede4; text-decoration: none; }
-  .site-footer a:hover { color: var(--gold); text-decoration: underline; }
-  .name { font: 300 1.2rem 'Poppins', sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
-  .copy { width: var(--page); margin: 16px auto 0 !important; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: .85rem; color: #b9ada0; }
+  .site-footer p { margin: 0 0 12px; line-height: 1.8; }
+  .label { font: 600 .74rem 'Jost', sans-serif; letter-spacing: .24em; text-transform: uppercase; color: var(--gold) !important; margin-bottom: 10px !important; }
+  .site-footer a { color: #f3ede4; text-decoration: none; transition: color .2s; }
+  .site-footer a:hover { color: var(--gold); }
+  .social { display: flex; justify-content: center; gap: 10px; }
+  .social a { padding: 6px 16px; border: 1px solid rgba(255, 255, 255, .2); border-radius: 999px; font-size: .9rem; transition: border-color .2s, color .2s; }
+  .social a:hover { border-color: var(--gold); }
+  .copy {
+    width: var(--page); margin: 36px auto 0 !important; padding-top: 22px; text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, .1); font-size: .82rem; letter-spacing: .08em; color: #a99d90;
+  }
 </style>
