@@ -1,0 +1,181 @@
+/* Home page design (src/pages/index.astro and the React islands in src/components/home/).
+   Only the home page loads this file. */
+
+.wrap { width: var(--page); margin: 0 auto; }
+.wrap.narrow { width: var(--read); }
+.center { text-align: center; }
+.kicker {
+  font: 600 .78rem/1 'Jost', sans-serif; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold-dark); margin: 0 0 12px;
+}
+.band { padding: clamp(64px, 9vw, 120px) 0; }
+.band h2 { margin: 0 0 clamp(28px, 4vw, 48px); max-width: 22ch; }
+.band.sand { background: var(--sand); }
+.band.dark { background: var(--brown); color: #f3ede4; }
+.band.dark h2, .band.dark .kicker { color: var(--gold); }
+.band.dark .kicker { text-align: center; }
+.button.ghost { background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .6); backdrop-filter: blur(6px); }
+.button.ghost:hover { background: rgba(255, 255, 255, .25); }
+
+/* ---- Hero: full-screen photo with a slow zoom ---------------------------------------- */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: calc(100svh - 72px);
+  display: grid; align-items: end;
+  color: #fff;
+}
+.hero-photo {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none;
+  object-fit: cover; z-index: -2;
+  animation: kenburns 30s ease-out both;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(20, 14, 10, .15) 0%, rgba(20, 14, 10, .2) 40%, rgba(20, 14, 10, .78) 100%);
+}
+@keyframes kenburns { from { transform: scale(1.12); } to { transform: scale(1); } }
+.hero-inner { width: var(--page); margin: 0 auto; padding: 0 0 clamp(56px, 10vh, 110px); }
+.hero-inner > * { animation: rise .9s cubic-bezier(.2, .7, .2, 1) both; }
+.hero-inner > :nth-child(2) { animation-delay: .1s; }
+.hero-inner > :nth-child(3) { animation-delay: .2s; }
+.hero-inner > :nth-child(4) { animation-delay: .32s; }
+.hero-inner > :nth-child(5) { animation-delay: .44s; }
+.hero-inner > :nth-child(6) { animation-delay: .56s; }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+.hero .eyebrow { font: 600 .85rem/1 'Jost', sans-serif; letter-spacing: .3em; text-transform: uppercase; color: #f6dfae; margin: 26px 0 12px; text-shadow: 0 1px 12px rgba(0, 0, 0, .5); }
+.hero h1 {
+  color: #fff; font-weight: 200; font-size: clamp(2.2rem, 6.2vw, 4.6rem); line-height: 1.08;
+  max-width: 17ch; margin: 0 0 18px; text-shadow: 0 2px 24px rgba(0, 0, 0, .35);
+}
+.hero .lede { font-size: clamp(1.05rem, 1.8vw, 1.3rem); max-width: 44ch; margin: 0 0 28px; opacity: .92; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-actions .button { padding: 14px 28px; font-size: 1.02rem; }
+.hero .note { font-size: .88rem; opacity: .78; margin: 22px 0 0; max-width: 52ch; }
+
+.season-now {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 16px 8px 12px; border-radius: 999px;
+  background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .35); backdrop-filter: blur(8px);
+  color: #fff; text-decoration: none; font-size: .92rem;
+}
+.season-now:hover { color: #fff; background: rgba(255, 255, 255, .24); }
+.season-now .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold); flex: none; }
+.season-now.live .dot { background: #7fd18b; box-shadow: 0 0 0 0 rgba(127, 209, 139, .7); animation: pulse 2s infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(127, 209, 139, 0); } 100% { box-shadow: 0 0 0 0 rgba(127, 209, 139, 0); } }
+
+.scroll-cue { position: absolute; left: 50%; bottom: 18px; translate: -50% 0; width: 26px; height: 42px; border: 2px solid rgba(255, 255, 255, .7); border-radius: 14px; }
+.scroll-cue span { position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: #fff; animation: cue 1.8s infinite; }
+@keyframes cue { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
+@media (max-width: 700px) { .scroll-cue { display: none; } }
+
+/* ---- Sections fade up as they scroll into view (scroll-driven CSS animation, no JavaScript) ---- */
+@supports (animation-timeline: view()) {
+  .reveal .wrap, .reveal .split-text, .reveal .split-photos {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}
+
+/* ---- Season calendar --------------------------------------------------------------- */
+.timeline .bar {
+  position: relative; height: 14px; border-radius: 999px; background: var(--line);
+  margin: 44px 0 64px;
+}
+.timeline .tick:first-of-type { translate: 0 0; }
+.timeline .seg { position: absolute; top: 0; bottom: 0; border-radius: 999px; opacity: .85; }
+.timeline .seg.on { opacity: 1; box-shadow: 0 0 0 4px rgba(208, 172, 104, .35); }
+.seg-spooky { --c: #c4622d; } .seg-minimoo { --c: #8a6d4f; } .seg-wonderland { --c: #2f6b5a; } .seg-love { --c: #b8506a; }
+.timeline .seg { background: var(--c); }
+.timeline .tick { position: absolute; top: 24px; translate: -50% 0; font-size: .78rem; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+.timeline .today { position: absolute; top: -10px; bottom: -10px; width: 3px; translate: -50% 0; background: var(--brown); border-radius: 2px; }
+.timeline .today b { position: absolute; bottom: calc(100% + 4px); left: 50%; translate: -50% 0; font: 600 .72rem/1 'Jost'; letter-spacing: .1em; text-transform: uppercase; background: var(--brown); color: #fff; padding: 4px 8px; border-radius: 4px; white-space: nowrap; }
+
+.season-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; }
+.season-card {
+  position: relative; background: #fff; border-radius: 14px; padding: 22px 22px 20px;
+  border-top: 5px solid var(--c); box-shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 8px 24px -12px rgba(39, 33, 30, .25);
+  transition: transform .25s, box-shadow .25s;
+}
+.season-card:hover { transform: translateY(-4px); box-shadow: 0 2px 4px rgba(0, 0, 0, .05), 0 18px 36px -16px rgba(39, 33, 30, .35); }
+.season-card h3 { margin: 6px 0 8px; }
+.season-card p { margin: 0 0 14px; font-size: .97rem; color: var(--brown-2); }
+.season-card a { font-weight: 500; text-decoration: none; color: var(--c); }
+.season-card .status { font-size: .8rem; font-weight: 600; letter-spacing: .04em; color: var(--c); }
+.season-card.now { outline: 2px solid var(--c); outline-offset: -2px; }
+.season-card.now .status::before { content: '● '; animation: blink 1.6s infinite; }
+.season-card.past { opacity: .62; }
+@keyframes blink { 50% { opacity: .3; } }
+
+/* ---- Experience finder ------------------------------------------------------------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.chips button {
+  font: 500 .95rem 'Jost', sans-serif; padding: 9px 18px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: #fff; color: var(--brown); transition: background .2s, color .2s, border-color .2s;
+}
+.chips button:hover { border-color: var(--olive); }
+.chips button[aria-pressed='true'] { background: var(--brown); border-color: var(--brown); color: #fff; }
+
+.cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 22px; }
+.card {
+  --rx: 0deg; --ry: 0deg; --gx: 50%; --gy: 50%;
+  position: relative; display: block; overflow: hidden; border-radius: 18px; aspect-ratio: 4 / 5;
+  color: #fff; text-decoration: none; isolation: isolate;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform .2s ease-out, box-shadow .3s;
+  box-shadow: 0 10px 30px -14px rgba(39, 33, 30, .5);
+}
+.card:hover { color: #fff; box-shadow: 0 24px 50px -20px rgba(39, 33, 30, .6); }
+.card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; z-index: -2; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.card:hover img { transform: scale(1.06); }
+.card::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 35%, rgba(20, 14, 10, .88) 100%); }
+.card::after {  /* glare that follows the pointer */
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(circle at var(--gx) var(--gy), rgba(255, 255, 255, .28), transparent 45%);
+}
+.card:hover::after { opacity: 1; }
+.card .badge { position: absolute; top: 14px; right: 14px; background: var(--gold); color: var(--brown); font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; }
+.card .body { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px; display: grid; gap: 6px; }
+.card .title { font: 300 1.45rem/1.2 'Poppins', sans-serif; }
+.card .blurb { font-size: .93rem; line-height: 1.5; opacity: .88; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.card .go { font-weight: 600; color: var(--gold); margin-top: 4px; transition: letter-spacing .3s; }
+.card:hover .go { letter-spacing: .06em; }
+::view-transition-group(*) { animation-duration: .45s; animation-timing-function: cubic-bezier(.2, .7, .2, 1); }
+
+/* ---- Split: overlapping photos + text --------------------------------------------- */
+.split { width: var(--page); margin: 0 auto; padding: clamp(64px, 9vw, 120px) 0; display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+.split-photos { position: relative; aspect-ratio: 1; }
+.split-photos img { position: absolute; border-radius: 18px; object-fit: cover; box-shadow: 0 24px 50px -24px rgba(39, 33, 30, .55); }
+.split-photos .p1 { width: 58%; height: 78%; left: 0; top: 0; }
+.split-photos .p2 { width: 60%; height: 62%; right: 0; bottom: 0; border: 8px solid var(--cream); }
+.split-text h2 { margin-top: 0; }
+@media (max-width: 800px) { .split { grid-template-columns: 1fr; } }
+
+/* ---- Reviews ------------------------------------------------------------------------ */
+.reviews { overflow: hidden; outline: none; }
+.reviews .track { display: flex; align-items: center; min-height: 15em; transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
+.review { flex: 0 0 100%; margin: 0; padding: 0 4px; text-align: center; }
+.review blockquote { font: 200 clamp(1.25rem, 2.6vw, 1.75rem)/1.5 'Poppins', sans-serif; margin: 0 auto 18px; max-width: 34ch; text-wrap: balance; }
+.review figcaption { color: var(--gold); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; font-size: .85rem; }
+.reviews .dots { display: flex; justify-content: center; gap: 10px; margin-top: 28px; }
+.reviews .dots button { width: 10px; height: 10px; padding: 0; border-radius: 999px; border: 0; background: rgba(255, 255, 255, .3); cursor: pointer; transition: width .3s, background .3s; }
+.reviews .dots button[aria-current='true'] { width: 28px; background: var(--gold); }
+.reviews:focus-visible { outline: 2px solid var(--gold); outline-offset: 8px; border-radius: 8px; }
+.band.dark .more { text-align: center; margin: 28px 0 0; }
+.band.dark .more a { color: var(--gold); }
+
+/* ---- Photo strip: an endless, slowly scrolling row ------------------------------------ */
+.strip { overflow: hidden; padding: 10px 0; background: var(--brown); }
+.strip-track { display: flex; gap: 10px; width: max-content; animation: marquee 70s linear infinite; }
+.strip:hover .strip-track { animation-play-state: paused; }
+.strip-photo { width: 300px; height: 220px; object-fit: cover; border-radius: 8px; flex: none; }
+@keyframes marquee { to { transform: translateX(calc(-50% - 5px)); } }
+
+/* ---- The Wix-synced wording, under the design ----------------------------------------- */
+.from-wix { padding-top: clamp(64px, 9vw, 110px); }
+.from-wix h2 { margin: 0 auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo, .hero-inner > *, .strip-track, .scroll-cue span, .season-now.live .dot { animation: none !important; }
+  .card { transform: none; }
+}

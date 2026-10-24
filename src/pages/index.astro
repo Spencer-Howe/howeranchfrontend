@@ -1,0 +1,137 @@
+---
+// The home page. The top part is designed here (hero, seasons, experiences, reviews, photo strip); the bottom
+// part is src/content/pages/index.md, the wording kept in step with Wix (scripts/wix-sync), so syncing still works.
+//
+// Astro "islands": everything renders to plain HTML at build time. Only components with a client:* directive
+// also ship JavaScript, and only for themselves:
+//   client:load     hydrate right away (the hero badge: it's on screen immediately)
+//   client:visible  hydrate when scrolled into view (seasons, experiences, reviews)
+import { getEntry, render } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import SeasonNow from '../components/home/SeasonNow.tsx';
+import SeasonTimeline from '../components/home/SeasonTimeline.tsx';
+import ExperienceFinder, { type Photo } from '../components/home/ExperienceFinder.tsx';
+import Reviews from '../components/home/Reviews.tsx';
+import { seasons, experiences, tags, reviews } from '../data/home';
+import { BOOKING_SITE } from '../data/site';
+import '../styles/home.css';
+
+import hero from '../assets/photos/home/home-4-c40250.jpg';
+import calves from '../assets/photos/animals/animals-1-d1a816.jpg';
+import wonderland from '../assets/photos/winterwonderland/winterwonderland-11-e50a2f.jpg';
+import pippi from '../assets/photos/home/home-2-b5b0db.jpg';
+import inn from '../assets/photos/home/christmas-inn-at-howe-ranch-ffd721.jpg';
+import banquet from '../assets/photos/winterwonderland/winterwonderland-10-572c6c.jpg';
+import spooky from '../assets/photos/home/home-1-0d1535.jpg';
+import wedding from '../assets/photos/weddings/ceremony-front-sunset-final-bg-copy-962ce7.jpg';
+import moo from '../assets/photos/home/home-3-bd7a0d.jpg';
+import creek from '../assets/photos/home/home-9-71d00c.jpg';
+
+const page = await getEntry('pages', 'index');
+if (!page) throw new Error('src/content/pages/index.md is missing');
+const { Content } = await render(page);
+
+// Photos for the React cards: Astro makes the resized WebP files and hands React their addresses
+const cardPhotos = { calves, wonderland, pippi, inn, banquet, spooky, wedding };
+const cardAlt: Record<string, string> = {
+  calves: 'Two fluffy baby Highland calves snuggled together in the straw',
+  wonderland: 'A family posing in a glittering Winter Wonderland scene with a castle and Christmas trees',
+  pippi: 'A girl hugging a white mini Highland calf by the creek',
+  inn: 'Christmas Inn at Howe Ranch flyer showing the lodge in the snow',
+  banquet: 'Guests at long holiday banquet tables under string lights',
+  spooky: 'Spooky Moo at Howe Ranch flyer',
+  wedding: 'Wedding ceremony seating in front of the lodge at sunset',
+};
+const photos: Record<string, Photo> = {};
+for (const [key, src] of Object.entries(cardPhotos)) {
+  const img = await getImage({ src, widths: [400, 760, 1100], format: 'webp' });
+  photos[key] = {
+    src: img.src, srcSet: img.srcSet.attribute, alt: cardAlt[key],
+    width: Number(img.attributes.width), height: Number(img.attributes.height),
+  };
+}
+
+// A strip of photos from the home page gallery that scrolls by itself (CSS only, no JavaScript)
+const strip = Object.values(import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/photos/home/home-{3,5,6,7,8,10,12,14,15,17,18,21}-*.jpg', { eager: true },
+)).map((m) => m.default);
+---
+<Base title={page.data.title} description={page.data.description} home>
+  <section class="hero">
+    <Image src={hero} alt="" class="hero-photo" widths={[640, 1024, 1530]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="hero-inner">
+      <SeasonNow client:load seasons={seasons} />
+      <p class="eyebrow">Welcome to Montana</p>
+      <h1>A fairytale alpine village in the foothills of Glacier National Park</h1>
+      <p class="lede">Mini Highland cows, barn friends, storybook weddings and seasonal magic in Kalispell, Montana.</p>
+      <div class="hero-actions">
+        <a class="button gold" href={BOOKING_SITE}>Book an experience</a>
+        <a class="button ghost" href="#experiences">Find your experience</a>
+      </div>
+      <p class="note">All farm experiences are by advance online reservation only. Private farm on a private road, no walk-ins.</p>
+    </div>
+    <a class="scroll-cue" href="#seasons" aria-label="Scroll down"><span></span></a>
+  </section>
+
+  <section id="seasons" class="band reveal">
+    <div class="wrap">
+      <p class="kicker">The year at Howe Ranch</p>
+      <h2>Every season tells a new story</h2>
+      <SeasonTimeline client:visible seasons={seasons} />
+    </div>
+  </section>
+
+  <section id="experiences" class="band sand reveal">
+    <div class="wrap">
+      <p class="kicker">Find your experience</p>
+      <h2>Baby Moo Magic… where love, wonder, and sweet moments come to life</h2>
+      <ExperienceFinder client:visible experiences={experiences} tags={tags} photos={photos} />
+    </div>
+  </section>
+
+  <section class="split reveal">
+    <div class="split-photos" aria-hidden="true">
+      <Image src={moo} alt="" widths={[400, 700]} sizes="(max-width: 800px) 60vw, 30vw" class="p1" />
+      <Image src={creek} alt="" widths={[400, 800]} sizes="(max-width: 800px) 70vw, 35vw" class="p2" />
+    </div>
+    <div class="split-text">
+      <p class="kicker">A private boutique farm</p>
+      <h2>Slow down, wander, celebrate</h2>
+      <p>
+        Howe Ranch is a magical place to slow down, wander, celebrate and spend time with the sweetest little
+        micro-Highland cows &amp; barn friends imaginable, with sweeping valley and mountain views and a roaring
+        glacier-fed creek winding through the property.
+      </p>
+      <a class="button" href="/animals">Meet the herd</a>
+    </div>
+  </section>
+
+  <section class="band dark reveal">
+    <div class="wrap narrow">
+      <p class="kicker">What guests say</p>
+      <Reviews client:visible reviews={reviews} />
+      <p class="more"><a href="/reviews">Read more reviews →</a></p>
+    </div>
+  </section>
+
+  <section class="strip" aria-label="Photos from the ranch">
+    <div class="strip-track">
+      {[...strip, ...strip].map((src, i) => (
+        <Image src={src} alt="" widths={[300, 600]} sizes="300px" class="strip-photo" aria-hidden={i >= strip.length ? 'true' : undefined} />
+      ))}
+    </div>
+  </section>
+
+  <section class="from-wix">
+    <div class="wrap narrow center">
+      <p class="kicker">Before you visit</p>
+      <h2>Everything you need to know</h2>
+    </div>
+    <article class="content">
+      <Content />
+      <ContactForm kind="contact" />
+    </article>
+  </section>
+</Base>

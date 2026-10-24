@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import react from '@astrojs/react';
 import { readFileSync, readdirSync } from 'node:fs';
 
 // Pages with `hidden: true` stay out of the sitemap (they're live, just not for Google)
@@ -17,7 +18,8 @@ export default defineConfig({
   // weddings.html at /weddings, so Google's existing links keep working.
   trailingSlash: 'never',
   build: { format: 'file' },
-  integrations: [sitemap({ filter: (page) => !hidden.some((h) => new URL(page).pathname === h) })],
+  // React powers the interactive "islands" on the home page (src/components/home/*.tsx)
+  integrations: [react(), sitemap({ filter: (page) => !hidden.some((h) => new URL(page).pathname === h) })],
   image: {
     // Every photo gets sized versions so phones download small files
     layout: 'constrained',

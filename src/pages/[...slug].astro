@@ -6,8 +6,9 @@ import ContactForm from '../components/ContactForm.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
-  return pages.map((page) => ({
-    params: { slug: page.id === 'index' ? undefined : page.id },
+  // The home page has its own design (src/pages/index.astro), which shows index.md inside it
+  return pages.filter((page) => page.id !== 'index').map((page) => ({
+    params: { slug: page.id },
     props: { page },
   }));
 }
@@ -15,7 +16,7 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 const { Content } = await render(page);
 ---
-<Base title={page.data.title} description={page.data.description} home={page.id === 'index'} hidden={page.data.hidden}>
+<Base title={page.data.title} description={page.data.description} hidden={page.data.hidden}>
   <article class="content">
     <Content />
     {page.data.form && <ContactForm kind={page.data.form} />}
