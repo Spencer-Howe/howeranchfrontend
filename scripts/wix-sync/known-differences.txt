@@ -1,0 +1,8 @@
+# Differences between Wix and the Astro site that are fine as they are. The checker lists these separately and
+# doesn't count them. One per line: the 12-letter id from the report, then # and why it's fine.
+
+# Mother's Day Retreat gallery: Wix itself refuses to serve these 3 photos (403 at every size, broken on Wix too),
+# so they can't be copied.
+47f24c39e29c  # broken on Wix: the photo can't be downloaded (403)
+91702ba35d20  # broken on Wix: the photo can't be downloaded (403)
+ba4e91b829ac  # broken on Wix: the photo can't be downloaded (403)

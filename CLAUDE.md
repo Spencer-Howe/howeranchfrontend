@@ -86,6 +86,11 @@ where you can, and explain to her what happened in a sentence.
 **Undo a published change:** find it with `git log --oneline`, then `git revert <id>` and push. Explain in plain
 words what was undone. Never use `git push --force` or `git reset --hard`.
 
+## Keeping it in step with Wix
+Wix is still the main site; this one is kept as an up-to-date copy. To copy over what changed on Wix:
+`python3 scripts/wix-sync/wix_changes.py`, then apply `wix-changes/report.md` (it says where each change came
+from and where it goes), and run it again until it says "Everything matches". Details: `scripts/wix-sync/README.md`.
+
 ## Rules that protect the site
 - Don't rename or delete a page file without adding a line to `public/_redirects` from the old address to the
   new one (old address  new address  301). Google and people's bookmarks use those addresses.

@@ -17,6 +17,7 @@ npm run dev            # http://localhost:4321, live reload (add -- --background
 npm run check          # full build + checks every internal link, photo and document
 npm run photos         # after adding photos: shrink big ones, web-safe names, flag iPhone HEIC files
 npm run check-links -- --external   # also check links to other websites
+python3 scripts/wix-sync/wix_changes.py   # what's changed on the live Wix site (see scripts/wix-sync/README.md)
 ```
 On Spencer's Linux machine Node 24 lives in `~/.local/node/node-v24.22.1-linux-x64/bin` (system Node is 22.22).
 

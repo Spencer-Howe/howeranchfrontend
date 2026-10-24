@@ -175,7 +175,7 @@ Rather than asking couples to source and assemble an entire venue from scratch, 
 
 <div class="center">
 
-[Wedding Photos](https://photos.app.goo.gl/gDQQw6RRFypBc7TB8)(from our old location with our signature style - Wedding assets and props represent our current inventory)
+[Wedding Photos](https://photos.app.goo.gl/gDQQw6RRFypBc7TB8) (from our old location with our signature style - Wedding assets and props represent our current inventory)
 
 </div>
 

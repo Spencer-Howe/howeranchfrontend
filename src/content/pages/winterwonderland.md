@@ -13,7 +13,7 @@ How to experience Winter Wonderland at Howe Ranch?
 
 Reserve a Private Winter Wonderland Group Experience[,](/bookwinterwonderlandcelebration) with use of all 8 magical areas, private petting zoo, including catering in the Christmas Market -- for your company party, team building event, family or group. Limited dates available Dec. 1 - Jan.31. Inquire today!
 
-[2. ](https://thehoweranchregistration.com/)[Give the Gift of Baby Cow Cuddling (1 - 15 Guests):](https://thehoweranchregistration.com/)Surprise your loved ones with a [Private Mini Moo](https://thehoweranchregistration.com/private-mini-moo) that includes: Bottle feeding and cuddles with our micro mini calves, Pippi, Sugarplum, Finnegan, Theodore, Tarnickel, meeting their mini cow friends; Spend time with Dolly the emu, mini goats, bunnies, and our sweet white donkey; Enjoy stunning views, photo ops in magical places and a guided tour of the farm. 
+[2. ](https://thehoweranchregistration.com/)[Give the Gift of Baby Cow Cuddling (1 - 15 Guests):](https://thehoweranchregistration.com/) Surprise your loved ones with a [Private Mini Moo](https://thehoweranchregistration.com/private-mini-moo) that includes: Bottle feeding and cuddles with our micro mini calves, Pippi, Sugarplum, Finnegan, Theodore, Tarnickel, meeting their mini cow friends; Spend time with Dolly the emu, mini goats, bunnies, and our sweet white donkey; Enjoy stunning views, photo ops in magical places and a guided tour of the farm. 
 
 📅 [Select your spot](https://thehoweranchregistration.com/private-mini-moo)
 

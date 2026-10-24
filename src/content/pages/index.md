@@ -49,17 +49,19 @@ Important! Prior to booking, guests new to the farm review [Farm](/_files/ugd/fc
 [![Magic Mini Moo Falling into Winter Wonderland Slide !](../../assets/photos/home/magic-mini-moo-falling-into-winter-wonderland-sl-6d03f5.jpg)](https://thehoweranchregistration.com/mini-moo-magic)
 
 <div class="buttons">
-<a class="button" href="https://thehoweranchregistration.com/mini-moo-magic">Mini Moo Magic</a>
-<a class="button" href="https://thehoweranchregistration.com/">Winter Wonderland</a>
-<a class="button" href="https://thehoweranchregistration.com/">Private Mini Moo</a>
-<a class="button" href="https://thehoweranchregistration.com/christmas-inn">Christmas Inn</a>
-<a class="button" href="https://thehoweranchregistration.com">Spooky Moo</a>
-<a class="button" href="/photos">Photos</a>
+<a class="button" href="https://thehoweranchregistration.com/mini-moo-magic">Mini Moo Magic with Photos</a>
+<a class="button" href="https://thehoweranchregistration.com/winter-wonderland">Winter Wonderland Event</a>
+<a class="button" href="https://thehoweranchregistration.com/private-mini-moo">Private Mini Moo Visit</a>
+<a class="button" href="https://thehoweranchregistration.com/christmas-inn">Christmas Inn Stay</a>
+<a class="button" href="https://thehoweranchregistration.com/private-winter-wonderland">Private Wonderland Celebration</a>
+<a class="button" href="https://thehoweranchregistration.com">Spooky Moo Halloweentown</a>
+<a class="button" href="/photos">Photo Albums</a>
 <a class="button" href="/media">Media</a>
 </div>
 
 <div class="photo-row">
 
+[![Private Winter Wonderland Celebrations flyer: holiday banquet tables in the Grand Hall, coffee bar, sweet treats and a baby Highland calf. Now booking weekdays and select Saturdays in December and January](../../assets/photos/shared/private-celebrations-0ada75.jpg)](https://thehoweranchregistration.com/private-winter-wonderland)
 [![Winter Wonderland at Howe Ranch Flyer](../../assets/photos/shared/winter-wonderland-at-howe-ranch-flyer-0643eb.jpg)](https://thehoweranchregistration.com/)
 [![Christmas Inn at Howe Ranch](../../assets/photos/home/christmas-inn-at-howe-ranch-ffd721.jpg)](https://thehoweranchregistration.com/)
 [![Howe Ranch at Howe Ranch](../../assets/photos/home/home-1-0d1535.jpg)](https://thehoweranchregistration.com/spooky-moo)
@@ -90,7 +92,7 @@ Unauthorized entry is strictly prohibited. Our neighborhood actively monitors an
 
 Because our team is fully dedicated to caring for the animals and hosting scheduled guests,<span class="alert"> questions about [<span class="alert"><span class="alert">exceptions/about experiences that are not available/about information already shared in our FAQs</span> </span>](/faqs)will not receive a response.</span>
 
-All farm visits are scheduled<span class="alert">at least 24 hours in advance</span>due to strict<span class="alert">liability regulations</span>(we must staff a safety trained facilitator), and cannot be refunded or changed to a new date once booked because your visit will be blocked for you and resources committed. No exceptions, policies apply to all guests equally.
+All farm visits are scheduled <span class="alert">at least 24 hours in advance</span> due to strict <span class="alert">liability regulations</span> (we must staff a safety trained facilitator), and cannot be refunded or changed to a new date once booked because your visit will be blocked for you and resources committed. No exceptions, policies apply to all guests equally.
 
 </div>
 

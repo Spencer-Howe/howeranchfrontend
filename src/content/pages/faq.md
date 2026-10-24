@@ -51,7 +51,7 @@ Alternatively, you can make a booking inquiry via text message inquiry to 951-24
 
 3\. For a simple private event booking, you can go through [Peerspace,](https://peerspace.app.link/9m7WzOZNyCb)[ which offers you day of event insurance, as well.](https://peerspace.app.link/9m7WzOZNyCb)
 
-4\. For a wedding ceremony or reception, review our [Wedding Celebrations page](/weddings)and utilize the DYI tool on our Wedding listing on [Peerspace](https://www.peerspace.com/pages/listings/647591b224653c000e5d878f?utm_source=copy_link&utm_campaign=listing_sharing). Note, a wedding reception is a "wedding event," so is an Elopement Party and so is a Micro Wedding. They are not categorized as "special event" and require wedding event resources and services from us.
+4\. For a wedding ceremony or reception, review our [Wedding Celebrations page](/weddings) and utilize the DYI tool on our Wedding listing on [Peerspace](https://www.peerspace.com/pages/listings/647591b224653c000e5d878f?utm_source=copy_link&utm_campaign=listing_sharing). Note, a wedding reception is a "wedding event," so is an Elopement Party and so is a Micro Wedding. They are not categorized as "special event" and require wedding event resources and services from us.
 
 5\. To experience a [Farm Stay](/stay-a-while) reach out to us directly. We do not offer this experience to the general public.
 

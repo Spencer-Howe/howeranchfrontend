@@ -26,3 +26,7 @@ pnpm-debug.log*
 # Windows
 Thumbs.db
 desktop.ini
+
+# Wix change reports (scripts/wix-sync)
+wix-changes/
+__pycache__/

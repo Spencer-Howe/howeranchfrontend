@@ -3,6 +3,8 @@ title: "Winter Wonderland Party"
 description: "Private Winter Wonderland Celebrations at Howe Ranch: an all-inclusive holiday experience for families, friends and businesses. Now in its 17th year."  # what Google shows under the page name (draft: review)
 ---
 
+![Private Winter Wonderland Celebrations flyer: holiday banquet tables in the Grand Hall, coffee bar, sweet treats and a baby Highland calf. Now booking weekdays and select Saturdays in December and January](../../assets/photos/shared/private-celebrations-0ada75.jpg)
+
 <div class="center">
 
 Private Winter Wonderland Celebrations
@@ -21,9 +23,9 @@ Whether you're planning a company holiday celebration, a festive family reunion,
 
 Make this year's gathering the one they'll never forget!
 
-🎄 Private Wonderland Celebration Season: December 1 – January 31 
+🎄 Private Wonderland Celebration Season:
 
-In the new year, Winter Wonderland gradually transforms from Christmas magic into our enchanting Season of Love.
+December 1 – January 31 | In the new year, Winter Wonderland gradually transforms from Christmas magic into our enchanting Season of Love.
 
 🎄 Dates already unavailable for Private Celebrations: December 6, 13, 20, 24 & 31
 
@@ -31,7 +33,7 @@ Explore the magic below and reserve your private celebration!
 
 <div class="center">
 
-Scroll down for details...
+Scroll down for details and your booking request...
 
 </div>
 
@@ -53,7 +55,7 @@ Scroll down for details...
 
 ![Village with pipp and guests backdrop copy](../../assets/photos/shared/village-with-pipp-and-guests-backdrop-copy-4fa7d8.jpg)
 ![grinch and teddy with guest](../../assets/photos/shared/grinch-and-teddy-with-guest-489d30.jpg)
-![AJ as Santa](../../assets/photos/shared/aj-as-santa-bd2aa5.jpg)
+![Santa waving from his red and gold throne with a smiling girl on his lap, under a garland arch](../../assets/photos/bookwinterwonderlandcelebration/aj-as-santa-with-girl-7b522c.jpg)
 
 </div>
 
@@ -173,7 +175,7 @@ The Group Experience includes:
 1. Venue fee and staff facilitation
 1. Scavenger Hunt with Prizes
 1. Petting Zoo & Staff, Baby Highland Cow and Farm Animal Cuddling and Feeding
-1. Access to Add Ons: Snow Cone Station, Enchanted Characters, Vocalist/Performer, Cookie Decorating or Ornament Making with Mrs Claus/Enchanted Character, Photo Booth
+1. Access to Add Ons: Snow Cone Station, Enchanted Characters, Vocalist/Performer, Cookie Decorating or Ornament Making with Mrs. Claus/Enchanted Character
 1. Onsite Parking
 1. Restrooms, including ADA
 
@@ -189,11 +191,12 @@ We will prepare your quote within 24 hours if all pertinent information is provi
 
 <div class="buttons">
 <a class="button" href="https://thehoweranchregistration.com/private-winter-wonderland">BOOK</a>
+<a class="button" href="/_files/ugd/fca21d_dd240906c22e49d681c391c310b76491.pdf">FAQs: Private Celebrations</a>
 </div>
 
 <div class="center">
 
-FAQs
+Quick Reminders:
 
 </div>
 
